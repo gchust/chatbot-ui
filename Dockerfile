@@ -26,4 +26,5 @@ COPY --from=build /app/next-i18next.config.js ./next-i18next.config.js
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD if [ -n "$SWAP" ]; then fallocate -l $(($(stat -f -c "(%a*%s/10)*7" .))) _swapfile && mkswap _swapfile && swapon _swapfile && ls -hla; fi; free -m; npm start
